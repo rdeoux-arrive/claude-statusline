@@ -12,7 +12,7 @@ IFS=$'\t' read -r cwd model used cost duration_ms < <(
 )
 
 # Raccourcir le chemin : première lettre de chaque composant intermédiaire
-short_cwd="${cwd/#$HOME/~}"
+short_cwd="${cwd/#$HOME/\~}"
 if [[ "$short_cwd" == */* ]]; then
     IFS='/' read -ra parts <<< "$short_cwd"
     last_idx=$(( ${#parts[@]} - 1 ))

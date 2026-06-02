@@ -51,7 +51,7 @@ Il est idempotent : relance-le pour mettre à jour le statusline. Relance ensuit
    {
      "statusLine": {
        "type": "command",
-       "command": "bash /home/<user>/.claude/statusline-command.sh"
+       "command": "bash ~/.claude/statusline-command.sh"
      }
    }
    ```
