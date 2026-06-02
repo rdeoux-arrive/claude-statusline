@@ -2,6 +2,8 @@
 
 Une barre de status **powerline** pour [Claude Code](https://claude.com/claude-code).
 
+![Aperçu du statusline](docs/statusline.png)
+
 Elle affiche, sous forme de segments colorés enchaînés :
 
 | Segment | Contenu |
