@@ -21,6 +21,21 @@ Elle affiche, sous forme de segments colorés enchaînés :
 
 ## Installation
 
+### Script automatique (recommandé)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rdeoux-arrive/claude-statusline/main/install.sh | bash
+```
+
+Le script :
+
+- clone (ou met à jour) le dépôt dans `~/.claude/claude-statusline` ;
+- déclare la clé `statusLine` dans `~/.claude/settings.json` (en sauvegardant l'ancien fichier en `.bak`, en préservant les autres clés).
+
+Il est idempotent : relance-le pour mettre à jour le statusline. Relance ensuite Claude Code.
+
+### Installation manuelle
+
 1. Récupère le script :
 
    ```bash
