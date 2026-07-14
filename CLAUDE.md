@@ -30,3 +30,19 @@ Conventions :
 - Icônes = emoji en `I_*`, déclarées groupées (l.32).
 - Le formatage numérique utilise `LC_ALL=C printf` pour forcer le point décimal indépendamment de la locale.
 - `GIT_OPTIONAL_LOCKS=0` + `git -C "$cwd"` : interroge le dépôt du répertoire courant sans poser de lock.
+
+## Régénérer la capture d'écran d'exemple
+
+`docs/generate-screenshot.py` régénère `docs/statusline.png` depuis `statusline-command.sh` : rendu ANSI → HTML (police + couleurs), rendu par le Chromium de Playwright, capture directe de l'élément (sans recadrage ni fichier temporaire).
+
+```bash
+uv run docs/generate-screenshot.py
+```
+
+Prérequis : [`uv`](https://docs.astral.sh/uv/) (installe seul la dépendance Playwright via les métadonnées PEP 723 du script), une police Nerd Font (séparateur powerline) et une police d'emoji couleur (ex. Noto Color Emoji, pour les icônes des segments). Le navigateur Chromium est géré par Playwright : il est téléchargé automatiquement à la première exécution (~/.cache/ms-playwright), ou manuellement via `playwright install chromium`. Aucune dépendance système à un navigateur (le Chromium de Playwright n'est pas un snap), donc pas de contrainte de confinement sur les chemins.
+
+Vérifier le script (lint + types) : `ruff check docs` passe tel quel, mais `ty check` seul échoue sur `playwright` (dépendance de l'env éphémère `uv`, absente du Python système). Type-checker le script avec ses dépendances installées :
+
+```bash
+uvx --with-requirements docs/generate-screenshot.py ty check docs/generate-screenshot.py
+```
