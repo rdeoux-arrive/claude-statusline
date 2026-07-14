@@ -54,7 +54,14 @@ add_seg() {
 add_seg $C_DIR_BG 231 "${I_DIR} ${short_cwd}"
 
 if [ -n "$model" ]; then
-    [ -n "$effort" ] && model="${model} (${effort})"
+    case "$effort" in
+        low)       model="${model} ○" ;;
+        medium)    model="${model} ◐" ;;
+        high)      model="${model} ●" ;;
+        xhigh)     model="${model} ◉" ;;
+        max)       model="${model} ◈" ;;
+        ultracode) model="${model} ✦" ;;
+    esac
     add_seg $C_MODEL_BG 231 "${I_MODEL} ${model}"
 fi
 
