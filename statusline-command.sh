@@ -1,13 +1,14 @@
 #!/bin/bash
 # Claude Code status line — powerline style
 
-IFS=$'\t' read -r cwd model used cost duration_ms < <(
+IFS=$'\t' read -r cwd model used cost duration_ms effort < <(
     jq -r '[
         .workspace.current_dir // .cwd,
         (.model.display_name // "Claude"),
         (.context_window.used_percentage // 0),
         (.cost.total_cost_usd // 0),
-        (.cost.total_duration_ms // 0)
+        (.cost.total_duration_ms // 0),
+        (.effort.level // empty)
     ] | @tsv'
 )
 
@@ -52,7 +53,10 @@ add_seg() {
 
 add_seg $C_DIR_BG 231 "${I_DIR} ${short_cwd}"
 
-[ -n "$model" ] && add_seg $C_MODEL_BG 231 "${I_MODEL} ${model}"
+if [ -n "$model" ]; then
+    [ -n "$effort" ] && model="${model} (${effort})"
+    add_seg $C_MODEL_BG 231 "${I_MODEL} ${model}"
+fi
 
 if [ -n "$used" ]; then
     LC_ALL=C printf -v ctx "%.0f" "$used"

@@ -11,7 +11,7 @@ Projet à fichier unique : `statusline-command.sh`, un script Bash qui génère 
 Pas de build ni de framework de test. Le script se valide en lui injectant un JSON factice sur stdin :
 
 ```bash
-echo '{"workspace":{"current_dir":"/home/u/p"},"model":{"display_name":"Opus"},"context_window":{"used_percentage":42},"cost":{"total_cost_usd":1.23,"total_duration_ms":65000}}' \
+echo '{"workspace":{"current_dir":"/home/u/p"},"model":{"display_name":"Opus"},"context_window":{"used_percentage":42},"cost":{"total_cost_usd":1.23,"total_duration_ms":65000},"effort":{"level":"high"}}' \
   | bash statusline-command.sh
 ```
 
@@ -21,7 +21,7 @@ Les champs sont tous optionnels côté script (valeurs par défaut via `// ` dan
 
 Le flux suit toujours le même pipeline, dans cet ordre :
 
-1. **Extraction** — un seul appel `jq ... | @tsv` parse les 5 champs en variables Bash (l.4-12). Ajouter une donnée = l'ajouter au filtre `jq` ET à la liste `IFS=$'\t' read`.
+1. **Extraction** — un seul appel `jq ... | @tsv` parse les 6 champs en variables Bash (l.4-13). Ajouter une donnée = l'ajouter au filtre `jq` ET à la liste `IFS=$'\t' read`.
 2. **Accumulation** — chaque segment est poussé via `add_seg <bg> <fg> <texte>` dans les tableaux parallèles `seg_bgs` / `seg_texts` (l.45-51). L'ordre des appels `add_seg` = l'ordre d'affichage.
 3. **Chaînage powerline** — la boucle finale (l.87-95) recolle les segments en insérant le séparateur solide `U+E0B0`, dont la **couleur de premier plan = la couleur de fond du segment précédent** et le fond = celle du suivant. C'est ce qui crée l'effet de chevrons enchaînés.
 

@@ -9,7 +9,7 @@ Elle affiche, sous forme de segments colorés enchaînés :
 | Segment | Contenu |
 |---------|---------|
 | 📂 | Répertoire courant, chemin raccourci (1ʳᵉ lettre des composants intermédiaires) |
-| 🧠 | Modèle actif |
+| 🧠 | Modèle actif (effort) |
 | 💾 | Utilisation du contexte (barre `████░░░░░░` + pourcentage) |
 | 💰 | Coût total de la session (USD) |
 | ⏱️ | Durée totale de la session |
